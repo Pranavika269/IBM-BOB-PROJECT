@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ProjectMatch: find the right project and the right teammates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="/" aria-label="ProjectMatch home">
+      <svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true"><circle cx="10" cy="11" r="9" fill="none" stroke="#3355FF" stroke-width="3"/><circle cx="20" cy="11" r="9" fill="none" stroke="#12A67C" stroke-width="3"/></svg>
+      <span>ProjectMatch</span>
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <button data-view="discover" class="on">Discover</button>
+      <button data-view="post">Post a project</button>
+      <button data-view="profile">My profile</button>
+    </nav>
+    <label class="who">Signed in as
+      <select id="who" aria-label="Switch profile"></select>
+    </label>
+  </header>
+
+  <main id="main">
+    <section id="view-discover" class="view">
+      <div class="view-head">
+        <h1 id="discover-title">Projects for you</h1>
+        <p>Ranked by how well your skills, interests, time and experience fit each team.</p>
+      </div>
+      <div class="split" id="split">
+        <div id="list" class="list" aria-live="polite"></div>
+        <aside id="detail" class="detail" aria-live="polite"></aside>
+      </div>
+    </section>
+
+    <section id="view-post" class="view" hidden>
+      <div class="view-head">
+        <h1>Post a project</h1>
+        <p>Tell us what the project needs. We'll start suggesting teammates who fill the gaps.</p>
+      </div>
+      <form id="post-form" class="form" novalidate>
+        <label>Title<input name="title" required maxlength="80" placeholder="e.g. Campus event finder"></label>
+        <label>What are you building?<textarea name="description" rows="4" required placeholder="Describe the idea, who it's for and what a finished version looks like."></textarea></label>
+        <div class="field"><span class="lbl" id="lbl-req">Skills the project needs</span><div id="post-skills" class="tags" aria-labelledby="lbl-req"></div><small>Type a skill and press Enter. Suggestions appear as you type.</small></div>
+        <div class="field"><span class="lbl" id="lbl-dom">Topics</span><div id="post-domains" class="tags" aria-labelledby="lbl-dom"></div></div>
+        <div class="row3">
+          <label>Team size<input type="number" name="team_size" min="2" max="10" value="4"></label>
+          <label>Hours per week<input type="number" name="hours_per_week" min="1" max="40" value="6"></label>
+          <label>Level
+            <select name="level"><option value="beginner">Beginner friendly</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced</option></select>
+          </label>
+        </div>
+        <p class="form-error" id="post-error" role="alert" hidden></p>
+        <button class="btn primary" type="submit">Post project</button>
+      </form>
+    </section>
+
+    <section id="view-profile" class="view" hidden>
+      <div class="view-head">
+        <h1 id="profile-title">My profile</h1>
+        <p>The more accurately you describe your skills and time, the better your matches.</p>
+      </div>
+      <form id="profile-form" class="form" novalidate>
+        <div class="row2">
+          <label>Full name<input name="name" required></label>
+          <label>Email<input name="email" type="email" required></label>
+        </div>
+        <div class="row2">
+          <label>Major<input name="major" placeholder="e.g. Computer Science"></label>
+          <label>Year<input name="year" placeholder="e.g. 3rd year"></label>
+        </div>
+        <label>About you<textarea name="bio" rows="3" placeholder="What do you enjoy building? What do you want to learn?"></textarea></label>
+        <div class="field"><span class="lbl" id="lbl-skills">Your skills</span><div id="profile-skills" class="tags" aria-labelledby="lbl-skills"></div></div>
+        <div class="field"><span class="lbl" id="lbl-int">Your interests</span><div id="profile-interests" class="tags" aria-labelledby="lbl-int"></div></div>
+        <div class="row2">
+          <label>Experience
+            <select name="experience"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
+          </label>
+          <label>Hours available per week<input type="number" name="hours_per_week" min="1" max="40" value="6"></label>
+        </div>
+        <p class="form-error" id="profile-error" role="alert" hidden></p>
+        <div class="actions">
+          <button class="btn primary" type="submit" id="profile-save">Save changes</button>
+          <button class="btn" type="button" id="profile-new">Create a new profile</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <datalist id="dl-skills"></datalist>
+  <datalist id="dl-domains"></datalist>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
